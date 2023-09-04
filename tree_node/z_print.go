@@ -2,7 +2,7 @@ package treenode
 
 import "fmt"
 
-func Print(pRoot *TreeNode) [][]int {
+func ZPrint(pRoot *TreeNode) [][]int {
 	// write code here
 	res := [][]int{}
 	if pRoot == nil {
