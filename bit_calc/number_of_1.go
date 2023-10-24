@@ -1,43 +1,24 @@
 package bitcalc
 
 func NumberOf1(n int) int {
-	// write code here
-	nums := n2b(n)
-	res := 0
-	for i := 0; i < len(nums); i++ {
-		if nums[i] == 1 {
-			res++
-		}
+	if n > 0 {
+		return numOf1Pos(n)
+	} else if n == 0 {
+		return 0
+	} else {
+		max := 1<<31 - 1
+		codeNum := max + n + 1
+		return numOf1Pos(codeNum) + 1
 	}
-	return res
 }
 
-func n2b(n int) []int {
-	res := make([]int, 0, 32)
-	if n > 0 {
-		for n > 0 {
-			res = append(res, n%2)
-			n = n / 2
+func numOf1Pos(n int) int {
+	res := 0
+	for n > 0 {
+		if n&1 == 1 {
+			res++
 		}
-		return res
-	} else if n == 0 {
-		return res
-	} else {
-		tmp := n2b(0 - n)
-		add := 1
-		for i := 0; i < 32; i++ {
-			tmp[i] = tmp[i] ^ 1
-		}
-		for i := 0; i < 32 && add == 1; i++ {
-			res := tmp[i] + add
-			if res == 2 {
-				tmp[i] = 0
-				add = 1
-			} else {
-				tmp[i] = res
-				add = 0
-			}
-		}
-		return tmp
+		n = n / 2
 	}
+	return res
 }
